@@ -80,13 +80,9 @@ define Package/cgminer/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cgminer  $(1)/usr/bin
 	$(INSTALL_BIN) $(FILES_DIR)/cgminer-monitor        $(1)/usr/bin
 
-ifeq ($(CONFIG_CGMINER_ANTS1),)
 	$(INSTALL_BIN) $(FILES_DIR)/cgminer.init           $(1)/etc/init.d/cgminer
 	$(CP)          $(FILES_DIR)/cgminer.config         $(1)/etc/config/cgminer
-else
-	$(INSTALL_BIN) $(FILES_DIR)/cgminer.ants1.init   $(1)/etc/init.d/cgminer
-	$(CP)          $(FILES_DIR)/cgminer.ants1.config $(1)/etc/config/cgminer
-endif
+
 endef
 
 $(eval $(call BuildPackage,cgminer))
