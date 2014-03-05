@@ -67,13 +67,6 @@ ifeq ($(CONFIG_CGMINER_ANTS1),)
 else
 	CONFIGURE_ARGS += --enable-ants1
 
-define Build/Prepare
-	$(call Build/Prepare/Default)
-
-	wget -O $(PKG_BUILD_DIR)/0001-ants1.patch \
-		"https://raw2.github.com/BitSyncom/avalon-extras/master/cgminer-patches/0001-ants1.patch"
-	(cd $(PKG_BUILD_DIR); patch -Np1 < 0001-ants1.patch;)
-endef
 
 endif
 
