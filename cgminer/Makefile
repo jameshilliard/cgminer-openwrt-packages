@@ -10,7 +10,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cgminer
 
-ifeq ($(CONFIG_CGMINER_AVALON2),y)
+ifeq ($(CONFIG_CGMINER_ANTS1),y)
 PKG_VERSION:=4.0.0
 PKG_REV:=2f454d8616fbc5c371849062aaf24c2bee51d831
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
@@ -62,17 +62,17 @@ endef
 CONFIGURE_ARGS += --disable-opencl --disable-adl
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
-ifeq ($(CONFIG_CGMINER_AVALON2),)
+ifeq ($(CONFIG_CGMINER_ANTS1),)
 	CONFIGURE_ARGS += --without-curses --enable-avalon
 else
-	CONFIGURE_ARGS += --enable-avalon2
+	CONFIGURE_ARGS += --enable-ants1
 
 define Build/Prepare
 	$(call Build/Prepare/Default)
 
-	wget -O $(PKG_BUILD_DIR)/0001-avalon2.patch \
-		"https://raw2.github.com/BitSyncom/avalon-extras/master/cgminer-patches/0001-avalon2.patch"
-	(cd $(PKG_BUILD_DIR); patch -Np1 < 0001-avalon2.patch;)
+	wget -O $(PKG_BUILD_DIR)/0001-ants1.patch \
+		"https://raw2.github.com/BitSyncom/avalon-extras/master/cgminer-patches/0001-ants1.patch"
+	(cd $(PKG_BUILD_DIR); patch -Np1 < 0001-ants1.patch;)
 endef
 
 endif
@@ -93,12 +93,12 @@ define Package/cgminer/install
 	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/cgminer  $(1)/usr/bin
 	$(INSTALL_BIN) $(FILES_DIR)/cgminer-monitor        $(1)/usr/bin
 
-ifeq ($(CONFIG_CGMINER_AVALON2),)
+ifeq ($(CONFIG_CGMINER_ANTS1),)
 	$(INSTALL_BIN) $(FILES_DIR)/cgminer.init           $(1)/etc/init.d/cgminer
 	$(CP)          $(FILES_DIR)/cgminer.config         $(1)/etc/config/cgminer
 else
-	$(INSTALL_BIN) $(FILES_DIR)/cgminer.avalon2.init   $(1)/etc/init.d/cgminer
-	$(CP)          $(FILES_DIR)/cgminer.avalon2.config $(1)/etc/config/cgminer
+	$(INSTALL_BIN) $(FILES_DIR)/cgminer.ants1.init   $(1)/etc/init.d/cgminer
+	$(CP)          $(FILES_DIR)/cgminer.ants1.config $(1)/etc/config/cgminer
 endif
 endef
 
