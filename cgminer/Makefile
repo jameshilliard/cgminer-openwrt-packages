@@ -13,6 +13,7 @@ PKG_NAME:=cgminer
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
 PKG_VERSION:=4.0.1
 PKG_REV:=4694afb33b9516fbaa7bae211178453bee8282ed
+endif
 
 PKG_RELEASE:=1
 PKG_INSTALL:=1
@@ -56,7 +57,7 @@ CONFIGURE_ARGS += --disable-opencl --disable-adl
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 ifeq ($(CONFIG_CGMINER_ANTS1),)
-	CONFIGURE_ARGS += --without-curses --enable-avalon
+	CONFIGURE_ARGS += --without-curses --enable-ants1
 else
 	CONFIGURE_ARGS += --enable-ants1
 
