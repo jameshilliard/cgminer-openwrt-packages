@@ -2,16 +2,11 @@
 # This file is for cron job
 
 # This if for make sure the start cgminer when there is network problem
+set -x
+date
 C=`pidof cgminer | wc -w`
 if [ "$C" != "1" ]; then
-    killall -s 9 cgminer
-    sleep 1
-    /etc/init.d/cgminer restart
-    exit 0;
-fi
-
-B=`cgminer-api devs | grep "^   \[Last Valid Work\]"`
-if [ "$?" != "0" ]; then
+    echo "Case C"
     killall -s 9 cgminer
     sleep 1
     /etc/init.d/cgminer restart
@@ -19,10 +14,22 @@ if [ "$?" != "0" ]; then
 fi
 
 A=`cat /tmp/cm.log`
-echo -n "$B" > /tmp/cm.log
-if [ "$A" == "$B" ]; then
+B=`cgminer-api devs | grep "^   \[Last Valid Work\]"`
+echo "$B" > /tmp/cm.log
+if [ "$B" != "" -a "$A" == "$B" ]; then
+    echo "Case B"
     killall -s 9 cgminer
     sleep 1
     /etc/init.d/cgminer restart
     exit 0;
 fi
+
+D=`cgminer-api stats | grep "^   \[miner_count\]"`
+if [ "$D" == "" ]; then
+	echo "Case D"
+	killall -s 9 cgminer
+	sleep 1
+	/etc/init.d/cgminer restart
+	exit 0;
+fi
+
