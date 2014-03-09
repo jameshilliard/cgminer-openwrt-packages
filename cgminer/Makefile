@@ -11,8 +11,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
-PKG_VERSION:=4.0.1
-PKG_REV:=d09f360e6a56a2b982ac3436aa94382c7a8c5a68
+PKG_VERSION:=4.1.0-f80a5184-antpatch
+PKG_REV:=f80a5184d4d5f4fd9b9fcce9834cea9014c64134
 endif
 
 PKG_RELEASE:=1
@@ -41,9 +41,7 @@ endif
 endef
 
 define Package/cgminer/description
-Cgminer is a multi-threaded multi-pool GPU, FPGA and CPU miner with ATI GPU
-monitoring, (over)clocking and fanspeed support for bitcoin and derivative
-coins. Do not use on multiple block chains at the same time!
+Cgminer is a multi-threaded multi-pool ASIC and FPGA miner for bitcoin coins.
 endef
 
 define Package/cgminer/config
@@ -53,7 +51,6 @@ define Package/cgminer/config
 	endmenu
 endef
 
-CONFIGURE_ARGS += --disable-opencl --disable-adl
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 ifeq ($(CONFIG_CGMINER_ANTS1),)
