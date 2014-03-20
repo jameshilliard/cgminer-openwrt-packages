@@ -11,8 +11,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
-PKG_VERSION:=4.1.0-f80a5184-antpatch
-PKG_REV:=f80a5184d4d5f4fd9b9fcce9834cea9014c64134
+PKG_VERSION:=ants1-4.2.0-b63babba
+PKG_REV:=b63babba6aaebebab2de2e056339b85a2d67ea3d
 endif
 
 PKG_RELEASE:=1
@@ -32,7 +32,7 @@ define Package/cgminer
 	SECTION:=utils
 	CATEGORY:=Utilities
 	TITLE:=cgminer
-	URL:=https://github.com/ckolivas/cgminer
+	URL:=https://github.com/kanoi/cgminer
 ifeq ($(CONFIG_TARGET_brcm2708_RaspberryPi),y)
 	DEPENDS:=+libcurl +libpthread +jansson +udev +libncurses
 else
