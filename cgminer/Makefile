@@ -11,8 +11,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
-PKG_VERSION:=ants1-4.2.0-b63babba
-PKG_REV:=b63babba6aaebebab2de2e056339b85a2d67ea3d
+PKG_VERSION:=ants1-4.2.0-17e25f48
+PKG_REV:=17e25f488b4b212a00d18471174b13b0a63931f7
 endif
 
 PKG_RELEASE:=1
