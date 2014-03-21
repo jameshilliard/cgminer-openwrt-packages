@@ -11,15 +11,15 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=cgminer
 
 ifeq ($(CONFIG_CGMINER_ANTS1),y)
-PKG_VERSION:=4.0.1
-PKG_REV:=4694afb33b9516fbaa7bae211178453bee8282ed
+PKG_VERSION:=ants1-4.2.0-28f27672
+PKG_REV:=28f27672d4deaef742c66a12522b745105b770f5
 endif
 
 PKG_RELEASE:=1
 PKG_INSTALL:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_REV).tar.bz2
-PKG_SOURCE_URL:=git://github.com/ckolivas/cgminer.git
+PKG_SOURCE_URL:=git://github.com/kanoi/cgminer.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
 PKG_SOURCE_VERSION:=$(PKG_REV)
@@ -32,7 +32,7 @@ define Package/cgminer
 	SECTION:=utils
 	CATEGORY:=Utilities
 	TITLE:=cgminer
-	URL:=https://github.com/ckolivas/cgminer
+	URL:=https://github.com/kanoi/cgminer
 ifeq ($(CONFIG_TARGET_brcm2708_RaspberryPi),y)
 	DEPENDS:=+libcurl +libpthread +jansson +udev +libncurses
 else
@@ -41,9 +41,7 @@ endif
 endef
 
 define Package/cgminer/description
-Cgminer is a multi-threaded multi-pool GPU, FPGA and CPU miner with ATI GPU
-monitoring, (over)clocking and fanspeed support for bitcoin and derivative
-coins. Do not use on multiple block chains at the same time!
+Cgminer is a multi-threaded multi-pool ASIC and FPGA miner for bitcoin coins.
 endef
 
 define Package/cgminer/config
@@ -53,7 +51,6 @@ define Package/cgminer/config
 	endmenu
 endef
 
-CONFIGURE_ARGS += --disable-opencl --disable-adl
 TARGET_LDFLAGS += -Wl,-rpath-link=$(STAGING_DIR)/usr/lib
 
 ifeq ($(CONFIG_CGMINER_ANTS1),)

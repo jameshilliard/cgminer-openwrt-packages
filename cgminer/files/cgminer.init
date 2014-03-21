@@ -70,9 +70,9 @@ start() {
 	#AOPTIONS=" --icarus-timing 2 -G -D"
 	AOPTIONS="--bitmain-options 115200:32:8:$_TO:$_cf:$_regv"
 	#PARAMS=" --lowmem $AOPTIONS $POOL1 $POOL2 $POOL3 $_pb --api-allow $_aa --api-listen" 
-	PARAMS="$AOPTIONS $POOL1 $POOL2 $POOL3 $_pb $_mo --api-listen --api-network" 
+	PARAMS="-q --lowmem $AOPTIONS $POOL1 $POOL2 $POOL3 $_pb $_mo --api-listen --api-network" 
 	#$APP --lowmem -D 2>&1 |tee clog.txt
-	$APP --lowmem --bitmain-options 115200:32:8:$_T0:$_cf:$_regv -q >/dev/null 2>&1
+	#$APP --lowmem --bitmain-options 115200:32:8:$_T0:$_cf:$_regv -q >/dev/null 2>&1
 	sleep 1
 	#when ntpd fail	can delet #
 	#touch /tmp/cgminer-ntpd-donei
